@@ -7,6 +7,8 @@ const TaskForm = ({ setTasks }) => {
     description: "",
     status: "todo",
   });
+ const [error, setError] = useState("");
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,12 +20,17 @@ const TaskForm = ({ setTasks }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!taskData.task.trim()) {
+      setError("Task title is required");
+      return;
+    }
     setTasks(taskData);
     setTaskData({
       task: "",
       description: "",
       status: "todo",
     });
+    setError("");
   };
 
   return (
@@ -32,11 +39,13 @@ const TaskForm = ({ setTasks }) => {
         <input
           type="text"
           name="task"
+          required=""
           value={taskData.task}
           className={styles.task_input}
           placeholder="Enter your task"
           onChange={handleChange}
         />
+        {error && <div className={styles.error}>{error}</div>}
         <div className={styles.task_form_bottom}>
           <div>
             <textarea
