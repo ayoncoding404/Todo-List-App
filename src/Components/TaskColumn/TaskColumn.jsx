@@ -11,7 +11,7 @@ const TaskColumn = ({title, icon: Icon}) => {
       <h2 className={styles.task_column_heading}>
         <Icon className={styles.task_column_icon} /> {title}
       </h2>
-     
+     <TaskCard />
     </section>
   );
 };
