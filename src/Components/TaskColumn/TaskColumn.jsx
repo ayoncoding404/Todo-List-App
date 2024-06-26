@@ -1,6 +1,3 @@
-import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
-import { MdTaskAlt } from "react-icons/md";
-
 import styles from "./TaskColumn.module.css";
 import TaskCard from "../TaskCard/TaskCard";
 
@@ -13,12 +10,13 @@ const TaskColumn = ({ title, icon: Icon, tasks, status, handleDelete }) => {
       {tasks.map(
         (task, index) =>
           task.status === status && (
-          <TaskCard 
-          key={index} 
-          title={task.task}
-          handleDelete={handleDelete}
-          index={index}
-           />
+            <TaskCard
+              key={index}
+              title={task.task}
+              description={task.description}
+              handleDelete={handleDelete}
+              index={index}
+            />
           )
       )}
     </section>

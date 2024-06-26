@@ -1,10 +1,10 @@
+import { useState } from "react";
 import "./App.css";
 import TaskColumn from "./Components/TaskColumn/TaskColumn";
 import TaskForm from "./Components/TaskForm/TaskForm";
 
 import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
 import { MdTaskAlt } from "react-icons/md";
-import { useState } from "react";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,9 +14,13 @@ const App = () => {
     setTasks(filteredTasks);
   };
 
+  const handleAddTask = (taskData) => {
+    setTasks([...tasks, taskData]);
+  };
+
   return (
     <div className="app">
-      <TaskForm setTasks={setTasks} />
+      <TaskForm setTasks={handleAddTask} />
       <main className="app_main">
         <TaskColumn
           title="New"
@@ -32,12 +36,12 @@ const App = () => {
           status="doing"
           handleDelete={handleDelete}
         />
-        <TaskColumn 
-        title="Done" 
-        icon={MdTaskAlt} 
-        tasks={tasks} 
-        status="done" 
-handleDelete={handleDelete}
+        <TaskColumn
+          title="Done"
+          icon={MdTaskAlt}
+          tasks={tasks}
+          status="done"
+          handleDelete={handleDelete}
         />
       </main>
     </div>

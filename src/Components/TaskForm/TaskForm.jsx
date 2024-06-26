@@ -4,25 +4,25 @@ import styles from "./TaskForm.module.css";
 const TaskForm = ({ setTasks }) => {
   const [taskData, setTaskData] = useState({
     task: "",
+    description: "",
     status: "todo",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setTaskData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-   
+    setTaskData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTasks((prev) => {
-      return [...prev, taskData];
+    setTasks(taskData);
+    setTaskData({
+      task: "",
+      description: "",
+      status: "todo",
     });
   };
 
@@ -40,9 +40,11 @@ const TaskForm = ({ setTasks }) => {
         <div className={styles.task_form_bottom}>
           <div>
             <textarea
-              type="text"
+              name="description"
+              value={taskData.description}
               className={styles.task_description}
               placeholder="Enter a description"
+              onChange={handleChange}
             />
           </div>
           <div>
