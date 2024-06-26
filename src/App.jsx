@@ -1,13 +1,22 @@
-import { useState } from "react";
-import "./App.css";
-import TaskColumn from "./Components/TaskColumn/TaskColumn";
-import TaskForm from "./Components/TaskForm/TaskForm";
-
+import { useEffect, useState } from "react";
 import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
 import { MdTaskAlt } from "react-icons/md";
+import TaskColumn from "./Components/TaskColumn/TaskColumn";
+import TaskForm from "./Components/TaskForm/TaskForm";
+import "./App.css";
+
+
+const todoTasks = localStorage.getItem("tasks");
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+
+
+  const [tasks, setTasks] = useState(JSON.parse(todoTasks) || []);
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+
+  },[tasks])
 
   const handleDelete = (taskIndex) => {
     const filteredTasks = tasks.filter((task, index) => index !== taskIndex);
