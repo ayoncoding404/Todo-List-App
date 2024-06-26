@@ -4,15 +4,41 @@ import TaskForm from "./Components/TaskForm/TaskForm";
 
 import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
 import { MdTaskAlt } from "react-icons/md";
+import { useState } from "react";
 
 const App = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const handleDelete = (taskIndex) => {
+    const filteredTasks = tasks.filter((task, index) => index !== taskIndex);
+    setTasks(filteredTasks);
+  };
+
   return (
     <div className="app">
-      <TaskForm />
+      <TaskForm setTasks={setTasks} />
       <main className="app_main">
-        <TaskColumn title="New" icon={TbTargetArrow}/>
-        <TaskColumn title="Ongoing"  icon={TbCalendarClock} />
-        <TaskColumn title="Done"  icon={MdTaskAlt}/>
+        <TaskColumn
+          title="New"
+          icon={TbTargetArrow}
+          tasks={tasks}
+          status="todo"
+          handleDelete={handleDelete}
+        />
+        <TaskColumn
+          title="Ongoing"
+          icon={TbCalendarClock}
+          tasks={tasks}
+          status="doing"
+          handleDelete={handleDelete}
+        />
+        <TaskColumn 
+        title="Done" 
+        icon={MdTaskAlt} 
+        tasks={tasks} 
+        status="done" 
+handleDelete={handleDelete}
+        />
       </main>
     </div>
   );

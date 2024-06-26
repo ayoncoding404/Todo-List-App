@@ -1,26 +1,41 @@
 import React, { useState } from "react";
 import styles from "./TaskForm.module.css";
 
-const TaskForm = () => {
-  const [task, setTask] = useState("");
-  const [status, setStatus] = useState("todo")
+const TaskForm = ({ setTasks }) => {
+  const [taskData, setTaskData] = useState({
+    task: "",
+    status: "todo",
+  });
 
-  const handleTaskChange = (e) => {
-    setTask(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setTaskData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+   
   };
-  const  handleStatusChange =(e) =>{
-    setStatus(e.target.value)
-  }
-  //console.log(task,status)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTasks((prev) => {
+      return [...prev, taskData];
+    });
+  };
 
   return (
     <header className={styles.app_header}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
+          name="task"
+          value={taskData.task}
           className={styles.task_input}
           placeholder="Enter your task"
-          onChange={handleTaskChange}
+          onChange={handleChange}
         />
         <div className={styles.task_form_bottom}>
           <div>
@@ -31,8 +46,12 @@ const TaskForm = () => {
             />
           </div>
           <div>
-            <select className={styles.task_status}
-             onChange={handleStatusChange}>
+            <select
+              className={styles.task_status}
+              value={taskData.status}
+              name="status"
+              onChange={handleChange}
+            >
               <option value="todo">New</option>
               <option value="doing">Ongoing</option>
               <option value="done">Done</option>
