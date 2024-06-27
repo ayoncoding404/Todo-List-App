@@ -22,15 +22,16 @@
 .task_description{
     display: flex;
     align-items :center;
-    justify-content: center;
     font-weight: 200;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%
 }
 
 .task_delete{
     width: 35px;
     height: 35px;
-    border-radius: 100%;
     display: flex;
     align-items :center;
     justify-content: center;

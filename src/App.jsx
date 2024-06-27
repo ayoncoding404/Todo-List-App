@@ -5,18 +5,14 @@ import TaskColumn from "./Components/TaskColumn/TaskColumn";
 import TaskForm from "./Components/TaskForm/TaskForm";
 import "./App.css";
 
-
 const todoTasks = localStorage.getItem("tasks");
 
 const App = () => {
-
-
   const [tasks, setTasks] = useState(JSON.parse(todoTasks) || []);
 
-  useEffect(()=>{
-    localStorage.setItem("tasks", JSON.stringify(tasks))
-
-  },[tasks])
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleDelete = (taskIndex) => {
     const filteredTasks = tasks.filter((task, index) => index !== taskIndex);
@@ -24,7 +20,7 @@ const App = () => {
   };
 
   const handleAddTask = (taskData) => {
-    setTasks([...tasks, taskData]);
+    setTasks([taskData, ...tasks]);
   };
 
   return (
