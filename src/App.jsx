@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import { TbTargetArrow, TbCalendarClock } from 'react-icons/tb';
-import { MdTaskAlt } from 'react-icons/md';
-import TaskColumn from './Components/TaskColumn/TaskColumn';
-import TaskForm from './Components/TaskForm/TaskForm';
-import './App.css';
+import { useEffect, useState } from "react";
+import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
+import { MdTaskAlt } from "react-icons/md";
+import TaskColumn from "./Components/TaskColumn/TaskColumn";
+import TaskForm from "./Components/TaskForm/TaskForm";
+import "./App.css";
 
-const todoTasks = localStorage.getItem('tasks');
+const todoTasks = localStorage.getItem("tasks");
 
 const App = () => {
   const [tasks, setTasks] = useState(JSON.parse(todoTasks) || []);
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const handleDelete = (taskIndex) => {
@@ -24,8 +24,12 @@ const App = () => {
   };
 
   const handleMove = (taskIndex, newStatus) => {
+    let completedAt = null;
+    if (newStatus === "done") completedAt = new Date().getTime();
     const updatedTasks = tasks.map((task, index) =>
-      index === taskIndex ? { ...task, status: newStatus } : task
+      index === taskIndex
+        ? { ...task, status: newStatus, completedAt: completedAt }
+        : task
     );
     setTasks(updatedTasks);
   };
@@ -53,7 +57,7 @@ const App = () => {
         <TaskColumn
           title="Done"
           icon={MdTaskAlt}
-          tasks={tasks}
+          tasks={tasks.sort((a, b) => b.completedAt - a.completedAt)}
           status="done"
           handleDelete={handleDelete}
           handleMove={handleMove}

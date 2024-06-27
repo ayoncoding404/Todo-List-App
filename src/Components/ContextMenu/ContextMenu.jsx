@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './ContextMenu.module.css';
+import styles from "./ContextMenu.module.css";
 
 const ContextMenu = ({ position, show, status, onMove }) => {
   if (!show) {
@@ -7,9 +6,9 @@ const ContextMenu = ({ position, show, status, onMove }) => {
   }
 
   const options = {
-    todo: ['doing', 'done'],
-    doing: ['todo', 'done'],
-    done: ['todo', 'doing']
+    todo: ["doing", "done"],
+    doing: ["todo", "done"],
+    done: ["todo", "doing"],
   };
 
   return (
@@ -17,10 +16,10 @@ const ContextMenu = ({ position, show, status, onMove }) => {
       className={styles.contextMenu}
       style={{
         top: position.y,
-        left: position.x
+        left: position.x,
       }}
     >
-      {options[status].map(option => (
+      {options[status].map((option) => (
         <li key={option} onClick={() => onMove(option)}>
           Move to {option.charAt(0).toUpperCase() + option.slice(1)}
         </li>

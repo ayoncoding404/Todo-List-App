@@ -1,19 +1,39 @@
 import styles from "./TaskCard.module.css";
 import { GoTrash } from "react-icons/go";
-import ContextMenu from '../ContextMenu/ContextMenu';
+import ContextMenu from "../ContextMenu/ContextMenu";
 import { useState } from "react";
 
-const TaskCard = ({ title, description, handleDelete, index,  status, handleMove, }) => {
+const StatusColorMap = {
+  todo: "#0a19a3",
+  doing: "#d98507",
+  done: "#007d04",
+};
+
+const StatusTextMap = {
+  todo: "New",
+  doing: "On Going",
+  done: "Done",
+};
+
+const TaskCard = ({
+  title,
+  dueDate,
+  description,
+  handleDelete,
+  index,
+  status,
+  handleMove,
+}) => {
   const [contextMenu, setContextMenu] = useState({
     show: false,
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
   });
 
   const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenu({
       show: true,
-      position: { x: event.pageX, y: event.pageY }
+      position: { x: event.pageX, y: event.pageY },
     });
   };
 
@@ -26,14 +46,30 @@ const TaskCard = ({ title, description, handleDelete, index,  status, handleMove
     setContextMenu({ show: false, position: { x: 0, y: 0 } });
   };
 
-  
   return (
     <div onContextMenu={handleContextMenu} onClick={handleClick}>
       <article className={styles.task_card}>
-        <p className={styles.task_text}>{title}</p>
+        <p className={styles.task_text}>
+          {title}{" "}
+          <span style={{ color: StatusColorMap[status] }}>
+            {StatusTextMap[status]}
+          </span>
+        </p>
+        {/* TODO */}
+        {!!dueDate && (
+          <>
+            Due date:
+            <p className={styles.task_text}>
+              {new Date(dueDate).toDateString()}
+            </p>
+          </>
+        )}
         <div className={styles.task_card_bottom}>
           <div className={styles.task_description}>{description}</div>
-          <button onClick={() => handleDelete(index)} className={styles.task_delete}>
+          <button
+            onClick={() => handleDelete(index)}
+            className={styles.task_delete}
+          >
             <GoTrash />
           </button>
         </div>

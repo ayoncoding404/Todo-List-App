@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import styles from "./TaskForm.module.css";
 
-const TaskForm = ({ setTasks }) => {
-  const [taskData, setTaskData] = useState({
-    task: "",
-    description: "",
-    status: "todo",
-  });
- const [error, setError] = useState("");
- 
+const initialTaskData = {
+  task: "",
+  description: "",
+  status: "todo",
+  createdAt: new Date().getTime(),
+  dueDate: null,
+  completedAt: null,
+};
 
+const TaskForm = ({ setTasks }) => {
+  const [taskData, setTaskData] = useState(initialTaskData);
+
+  const [error, setError] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTaskData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "dueDate" ? new Date(value).getTime() : value,
     }));
   };
 
@@ -25,11 +29,7 @@ const TaskForm = ({ setTasks }) => {
       return;
     }
     setTasks(taskData);
-    setTaskData({
-      task: "",
-      description: "",
-      status: "todo",
-    });
+    setTaskData(initialTaskData);
     setError("");
   };
 
@@ -55,6 +55,15 @@ const TaskForm = ({ setTasks }) => {
               placeholder="Enter a description"
               onChange={handleChange}
             />
+          </div>
+          <div>
+            <label htmlFor="dueDate">Due Date:</label>
+            <input
+              type="datetime-local"
+              id="dueDate"
+              name="dueDate"
+              onChange={handleChange}
+            ></input>
           </div>
           <div>
             <select
