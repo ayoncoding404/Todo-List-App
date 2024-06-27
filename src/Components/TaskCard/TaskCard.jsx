@@ -49,21 +49,12 @@ const TaskCard = ({
   return (
     <div onContextMenu={handleContextMenu} onClick={handleClick}>
       <article className={styles.task_card}>
-        <p className={styles.task_text}>
+        <div className={styles.task_text}>
           {title}{" "}
-          <span style={{ color: StatusColorMap[status] }}>
+          <div style={{ color: StatusColorMap[status], fontSize: " 12px" }}>
             {StatusTextMap[status]}
-          </span>
-        </p>
-        {/* TODO */}
-        {!!dueDate && (
-          <>
-            Due date:
-            <p className={styles.task_text}>
-              {new Date(dueDate).toDateString()}
-            </p>
-          </>
-        )}
+          </div>
+        </div>
         <div className={styles.task_card_bottom}>
           <div className={styles.task_description}>{description}</div>
           <button
@@ -73,6 +64,12 @@ const TaskCard = ({
             <GoTrash />
           </button>
         </div>
+        {!!dueDate && (
+          <div className={styles.task_date}>
+            Due date:
+            <p>{new Date(dueDate).toDateString()}</p>
+          </div>
+        )}
       </article>
       <ContextMenu
         position={contextMenu.position}

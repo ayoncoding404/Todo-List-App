@@ -47,18 +47,18 @@ const TaskForm = ({ setTasks }) => {
         />
         {error && <div className={styles.error}>{error}</div>}
         <div className={styles.task_form_bottom}>
-          <div>
-            <textarea
-              name="description"
-              value={taskData.description}
-              className={styles.task_description}
-              placeholder="Enter a description"
-              onChange={handleChange}
-            />
-          </div>
-          <div>
+          <textarea
+            name="description"
+            value={taskData.description}
+            className={styles.task_description}
+            placeholder="Enter a description"
+            onChange={handleChange}
+          />
+
+          <div className={styles.task_date}>
             <label htmlFor="dueDate">Due Date:</label>
             <input
+              className={styles.task_date_holder}
               type="datetime-local"
               id="dueDate"
               name="dueDate"
@@ -66,17 +66,6 @@ const TaskForm = ({ setTasks }) => {
             ></input>
           </div>
           <div>
-            <select
-              className={styles.task_status}
-              value={taskData.status}
-              name="status"
-              onChange={handleChange}
-            >
-              <option value="todo">New</option>
-              <option value="doing">Ongoing</option>
-              <option value="done">Done</option>
-            </select>
-
             <button type="submit" className={styles.task_submit}>
               + Add Task
             </button>
