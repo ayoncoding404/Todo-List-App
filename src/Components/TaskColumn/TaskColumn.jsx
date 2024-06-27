@@ -1,7 +1,8 @@
-import styles from "./TaskColumn.module.css";
-import TaskCard from "../TaskCard/TaskCard";
+import React from 'react';
+import styles from './TaskColumn.module.css';
+import TaskCard from '../TaskCard/TaskCard';
 
-const TaskColumn = ({ title, icon: Icon, tasks, status, handleDelete }) => {
+const TaskColumn = ({ title, icon: Icon, tasks, status, handleDelete, handleMove }) => {
   return (
     <section className="task_column">
       <h2 className={styles.task_column_heading}>
@@ -14,7 +15,9 @@ const TaskColumn = ({ title, icon: Icon, tasks, status, handleDelete }) => {
               key={index}
               title={task.task}
               description={task.description}
+              status={status}
               handleDelete={handleDelete}
+              handleMove={handleMove}
               index={index}
             />
           )

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { TbTargetArrow, TbCalendarClock } from "react-icons/tb";
-import { MdTaskAlt } from "react-icons/md";
-import TaskColumn from "./Components/TaskColumn/TaskColumn";
-import TaskForm from "./Components/TaskForm/TaskForm";
-import "./App.css";
+import { useEffect, useState } from 'react';
+import { TbTargetArrow, TbCalendarClock } from 'react-icons/tb';
+import { MdTaskAlt } from 'react-icons/md';
+import TaskColumn from './Components/TaskColumn/TaskColumn';
+import TaskForm from './Components/TaskForm/TaskForm';
+import './App.css';
 
-const todoTasks = localStorage.getItem("tasks");
+const todoTasks = localStorage.getItem('tasks');
 
 const App = () => {
   const [tasks, setTasks] = useState(JSON.parse(todoTasks) || []);
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   const handleDelete = (taskIndex) => {
@@ -21,6 +21,13 @@ const App = () => {
 
   const handleAddTask = (taskData) => {
     setTasks([taskData, ...tasks]);
+  };
+
+  const handleMove = (taskIndex, newStatus) => {
+    const updatedTasks = tasks.map((task, index) =>
+      index === taskIndex ? { ...task, status: newStatus } : task
+    );
+    setTasks(updatedTasks);
   };
 
   return (
@@ -33,6 +40,7 @@ const App = () => {
           tasks={tasks}
           status="todo"
           handleDelete={handleDelete}
+          handleMove={handleMove}
         />
         <TaskColumn
           title="Ongoing"
@@ -40,6 +48,7 @@ const App = () => {
           tasks={tasks}
           status="doing"
           handleDelete={handleDelete}
+          handleMove={handleMove}
         />
         <TaskColumn
           title="Done"
@@ -47,6 +56,7 @@ const App = () => {
           tasks={tasks}
           status="done"
           handleDelete={handleDelete}
+          handleMove={handleMove}
         />
       </main>
     </div>
