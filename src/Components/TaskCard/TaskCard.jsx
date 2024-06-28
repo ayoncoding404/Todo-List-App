@@ -4,14 +4,14 @@ import ContextMenu from "../ContextMenu/ContextMenu";
 import { useState } from "react";
 
 const StatusColorMap = {
-  todo: "#0a19a3",
-  doing: "#d98507",
+  new: "#0a19a3",
+  ongoing: "#d98507",
   done: "#007d04",
 };
 
 const StatusTextMap = {
-  todo: "New",
-  doing: "On Going",
+  new: "New",
+  ongoing: "On Going",
   done: "Done",
 };
 

@@ -42,7 +42,7 @@ const App = () => {
           title="New"
           icon={TbTargetArrow}
           tasks={tasks}
-          status="todo"
+          status="new"
           handleDelete={handleDelete}
           handleMove={handleMove}
         />
@@ -50,7 +50,7 @@ const App = () => {
           title="Ongoing"
           icon={TbCalendarClock}
           tasks={tasks}
-          status="doing"
+          status="ongoing"
           handleDelete={handleDelete}
           handleMove={handleMove}
         />

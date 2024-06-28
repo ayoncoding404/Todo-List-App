@@ -4,7 +4,7 @@ import styles from "./TaskForm.module.css";
 const initialTaskData = {
   task: "",
   description: "",
-  status: "todo",
+  status: "new",
   createdAt: new Date().getTime(),
   dueDate: null,
   completedAt: null,

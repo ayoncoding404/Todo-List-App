@@ -6,8 +6,8 @@ const ContextMenu = ({ position, show, status, onMove }) => {
   }
 
   const options = {
-    todo: ["ongoing", "done"],
-    doing: ["new", "done"],
+    new: ["ongoing", "done"],
+    ongoing: ["new", "done"],
     done: ["new", "ongoing"],
   };
 
