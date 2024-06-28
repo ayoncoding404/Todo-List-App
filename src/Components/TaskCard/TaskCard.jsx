@@ -1,6 +1,7 @@
 import styles from "./TaskCard.module.css";
 import { GoTrash } from "react-icons/go";
 import ContextMenu from "../ContextMenu/ContextMenu";
+import { IoAlertCircleOutline } from "react-icons/io5";
 import { useState } from "react";
 
 const StatusColorMap = {
@@ -46,6 +47,16 @@ const TaskCard = ({
     setContextMenu({ show: false, position: { x: 0, y: 0 } });
   };
 
+  const isDueToday = (dueDate) => {
+    const today = new Date();
+    const due = new Date(dueDate);
+    return (
+      due.getDate() === today.getDate() &&
+      due.getMonth() === today.getMonth() &&
+      due.getFullYear() === today.getFullYear()
+    );
+  };
+
   return (
     <div onContextMenu={handleContextMenu} onClick={handleClick}>
       <article className={styles.task_card}>
@@ -67,7 +78,12 @@ const TaskCard = ({
         {!!dueDate && (
           <div className={styles.task_date}>
             Due date:
-            <p>{new Date(dueDate).toDateString()}</p>
+            <p>
+              {new Date(dueDate).toDateString()}{" "}
+              {isDueToday(dueDate) && (
+                <IoAlertCircleOutline color="red" position="relative" />
+              )}
+            </p>
           </div>
         )}
       </article>
