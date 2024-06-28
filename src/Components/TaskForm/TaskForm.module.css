@@ -50,16 +50,6 @@
    
 }
 
-.task_status{
-    font-size: 16px;
-     font-weight: 500;
-     border: 1px solid #999;
-     border-radius: 5px;
-     width: 120px;
-     height: 40px;
-     padding: 0 5px;
-}
-
 .task_submit{
     font-size: 12px;
     font-weight: 500;
@@ -89,4 +79,66 @@
     border-radius: 4px;
     background-color: #f8f8f8;
     font-size: 13px;
+}
+
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    .app_header > form {
+        width: 80%;
+    }
+
+    .task_input{
+        width: 100%;
+    }
+
+    .task_form_bottom {
+        gap: 10px;
+    }
+
+    .task_submit {
+        position: relative;
+        width: 100%;
+        margin-left: 0;
+    }
+    .task_description{
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .app_header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+
+    }
+    
+
+    .task_input {
+        font-size: 12px;
+    }
+
+    .task_description {
+        font-size: 12px;
+        position: relative;
+        padding: 0;
+        
+    }
+
+    .task_submit {
+        font-size: 10px;
+        height: 36px;
+        padding: 3px 10px;
+    }
+
+    .task_date_holder {
+        font-size: 8px;
+    }
+
+    .task_date label {
+        display: none;
+    }
 }
